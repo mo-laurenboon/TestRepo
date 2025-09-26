@@ -1,8 +1,8 @@
 name: test-action
-on: 
-  issues:
-    types: [opened, editted] 
-  workflow_dispatch:
+#on: 
+#  issues:
+#    types: [opened, editted] 
+#  workflow_dispatch:
 jobs:
   test-action-job:
     runs-on: ubuntu-22.04
@@ -19,5 +19,4 @@ jobs:
         # run: assign file ID g<type>NNN.json
         # run: check for duplicate based on longs, lats and type, if unique, store in repo
         # run: if duplicate message user pointing them to ID 
-        
-        
+  
