@@ -12,7 +12,7 @@ body:
       required: true
   - type: dropdown
     attributes: 
-      label: type
+      label: Type
       description: What is the grid type?
       multiple: false
       options:
