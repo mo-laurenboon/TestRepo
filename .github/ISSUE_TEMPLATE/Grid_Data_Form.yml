@@ -2,9 +2,6 @@ name: Grid data
 description: File a grid format
 title: "[Grid]: "
 body:
-  - type: markdown
-    attributes: 
-      value: Input grid information.
   - type: textarea
     id: grid-description
     attributes:
