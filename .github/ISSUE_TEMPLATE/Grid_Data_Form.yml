@@ -9,7 +9,7 @@ body:
     id: grid-description
     attributes:
       label: Grid description
-      description: Grid description:
+      description: Grid description
       placeholder: Description.....
     validations:
       required: true
