@@ -1,15 +1,23 @@
 name: test-action
-
 on: 
-  push:
+  issues:
+    types: [opened, editted] 
   workflow_dispatch:
-
 jobs:
   test-action-job:
-
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
     steps: 
-      - name: checkout code
+      - name: checkout repo
         uses: action/checkout@v3
-      - run: echo "$(cat another-test-script.txt)"
+        
+      - name: setup python 
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11 
+        
+      - name: construct JSON
+        # run: assign file ID g<type>NNN.json
+        # run: check for duplicate based on longs, lats and type, if unique, store in repo
+        # run: if duplicate message user pointing them to ID 
+        
+        
