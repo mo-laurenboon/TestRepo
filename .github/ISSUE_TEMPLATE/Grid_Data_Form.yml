@@ -4,8 +4,7 @@ title: "[Grid]: "
 body:
   - type: markdown
     attributes: 
-      value: |
-      Input grid information.
+      value: Input grid information.
   - type: textarea
     id: grid-description
     attributes:
