@@ -5,8 +5,8 @@ body:
   - type: textarea
     id: grid-description
     attributes:
-      label: Grid description
-      description: Grid description
+      label: Grid Description
+      description: Describe the grid
       placeholder: Description.....
     validations:
       required: true
@@ -24,7 +24,7 @@ body:
   - type: input
     id: lat-points
     attributes:
-      label: Laitude-points
+      label: Laitude Points
       description: Number of latitude points
       placeholder: ...
     validations:
@@ -32,7 +32,7 @@ body:
   - type: input
     id: long-points
     attributes:
-      label: Longitude-points
+      label: Longitude Points
       description: Number of longitude points
       placeholder: ...
     validations:
