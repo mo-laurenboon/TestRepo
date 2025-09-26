@@ -1,6 +1,6 @@
 name: test-action
 
-on: [pull]
+on: [pull, push]
 
 jobs:
   test-action-job:
