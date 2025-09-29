@@ -1,5 +1,3 @@
-#$ cat .github/actions/update-and-push/action.yml
-
 name: 'branching'
 description: 'create new branch'
 inputs:
@@ -16,7 +14,6 @@ runs:
     - name: Update file
       run: echo "branch successfuly created" > gh-update.txt
       shell: bash
-      
     - name: Commit and push
       id: push
       run: |
@@ -30,6 +27,5 @@ runs:
         else
           echo "Skipping push as update_only is true"
         fi
-
         echo "branch=$branch" >> "$GITHUB_OUTPUT"
       shell: bash
