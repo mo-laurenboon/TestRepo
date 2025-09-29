@@ -7,8 +7,12 @@ jobs:
   update_database:
     runs-on: ubuntu-22.04
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
+      - name: checkout repo 
+        uses: actions/checkout@v3 #checkout repo contents (VERFIED FUNCTIONAL)
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11 
       - name: confirm action
         run: echo "action successfull"
         # run: assign file ID g<type>NNN.json
