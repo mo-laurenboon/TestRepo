@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-   #   - uses: .github/actions/setup-repo@v3
-   #   - uses: ./.github/actions/update-and-push
+      - uses: .github/actions/setup-repo@v3
+      - uses: ./.github/actions/update-and-push
       - name: Open pull request
         run: |
           gh pr create \
@@ -17,4 +17,4 @@ jobs:
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
