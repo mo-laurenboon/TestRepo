@@ -1,0 +1,4 @@
+$ cat .github/actions/update-and-push/action.yml
+
+name: 'branching'
+description: 'create new branch'
