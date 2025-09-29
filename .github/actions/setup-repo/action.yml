@@ -2,6 +2,10 @@
 
 name: 'setup repository'
 description: 'congifure git user for commits'
+inputs:
+  token:
+    description: 'Github token'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -9,3 +13,4 @@ runs:
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user-email "github-actions[bot]@users.noreply.github.com"
+      shell: bash
