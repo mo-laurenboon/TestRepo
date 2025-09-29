@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-repo
       - uses: ./.github/actions/update-and-push
+      - name: show issue body
+        run: $ echo "$ {{github.event.issue.body}} "
       - name: Open pull request
         run: |
           gh pr create \
