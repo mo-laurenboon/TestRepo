@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
    #   - uses: .github/actions/setup-repo@v3
-      - uses: ./.github/actions/update-and-push
+   #   - uses: ./.github/actions/update-and-push
       - name: Open pull request
         run: |
           gh pr create \
