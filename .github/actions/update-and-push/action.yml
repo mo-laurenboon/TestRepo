@@ -2,3 +2,23 @@ $ cat .github/actions/update-and-push/action.yml
 
 name: 'branching'
 description: 'create new branch'
+outputs:
+  branch:
+    description: 'Branch name'
+    value: ${{ steps.push.outputs.branch }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Update file
+      run: echo "branch successfuly created"
+    - name: Commit and push
+      id: push
+      run: |
+        git checkout -b "$branch"
+        git add gh-update.txt
+        git commit -m "chore: update file"
+        echo "Pushing branch: $branch"
+        git push origin "$branch"
+      
+
+  
