@@ -2,6 +2,10 @@
 
 name: 'branching'
 description: 'create new branch'
+inputs:
+  update_only:
+   required: false
+   default: false
 outputs:
   branch:
     description: 'Branch name'
@@ -11,14 +15,21 @@ runs:
   steps:
     - name: Update file
       run: echo "branch successfuly created"
+      shell: bash
+      
     - name: Commit and push
       id: push
       run: |
-        git checkout -b "$branch"
-        git add gh-update.txt
-        git commit -m "chore: update file"
-        echo "Pushing branch: $branch"
-        git push origin "$branch"
-      
+        branch="gh/update-$(date +%s)"
+        if [ "${{ inputs.update_only }}" = "false" ]; then
+          git checkout -b "$branch"
+          git add gh-update.txt
+          git commit -m "chore: update file"
+          echo "Pushing branch: $branch"
+          git push origin "$branch"
+        else
+          echo "Skipping push as update_only is true"
+        fi
 
-  
+        echo "branch=$branch" >> "$GITHUB_OUTPUT"
+      shell: bash
