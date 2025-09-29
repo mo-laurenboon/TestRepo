@@ -1,0 +1,19 @@
+$ cat .github/workflows/create-pr.yml
+
+name: 'create pull request'
+on:
+  workflow_dispatch:
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-repo
+      - uses: ./.github/actions/update-and-push
+      - name: Open pull request
+        run: |
+          gh pr create \
+            --title "chore: update via gh cli" \
+            --body "This PR was created using the GitHub CLI." \
+            --base main \
+            --head $(git rev-parse --abbrev-ref HEAD)
