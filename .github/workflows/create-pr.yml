@@ -1,6 +1,5 @@
 $ cat .github/workflows/create-pr.yml
-
-name: 'create pull request'
+name:'create pull request'
 on:
   workflow_dispatch:
 jobs:
