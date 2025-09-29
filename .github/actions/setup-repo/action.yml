@@ -1,2 +1,11 @@
 $ cat .github/actions/setup-repo/action.yml
 
+name: 'setup repository'
+description: 'congifure git user for commits'
+runs:
+  using: 'composite'
+  steps:
+    - name: confiure user
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user-email "github-actions[bot]@users.noreply.github.com"
