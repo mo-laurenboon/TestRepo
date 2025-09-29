@@ -14,7 +14,7 @@ runs:
   using: 'composite'
   steps:
     - name: Update file
-      run: echo "branch successfuly created"
+      run: echo "branch successfuly created" > gh-update.txt
       shell: bash
       
     - name: Commit and push
