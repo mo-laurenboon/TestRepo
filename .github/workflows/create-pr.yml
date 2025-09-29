@@ -16,8 +16,8 @@ jobs:
       - name: Open pull request
         run: |
           gh pr create \
-            --title "chore: update via gh cli" \
-            --body "This PR was created using the GitHub CLI." \
+            --title "New grid format added from issue form" \
+            --body "New grid format added" \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
         env:
