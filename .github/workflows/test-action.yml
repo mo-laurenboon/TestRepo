@@ -1,6 +1,6 @@
 name: test-action
 on: 
-  pull_request:
+  issues:
     types: opened
   workflow_dispatch:
 jobs:
