@@ -1,4 +1,4 @@
-$ cat .github/actions/setup-repo/action.yml
+#$ cat .github/actions/setup-repo/action.yml
 
 name: 'setup repository'
 description: 'congifure git user for commits'
