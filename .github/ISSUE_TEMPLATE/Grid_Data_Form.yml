@@ -1,6 +1,6 @@
 name: Grid data
 description: File a grid format
-title: "[Grid]: "
+title: "Grid Format Addition Request: "
 body:
   - type: textarea
     id: grid-description
