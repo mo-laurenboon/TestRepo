@@ -41,7 +41,7 @@ jobs:
         run: | #creates pull request body
           gh pr create \
             --title "New grid format added from issue form" \
-            --body "insert pull request body here" \
+            --body "New grid format addition pull request initiated from ${{ github.actor }} on ${{ steps.create-branch.outputs.branch } branch " \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
             
