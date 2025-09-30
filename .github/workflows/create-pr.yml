@@ -32,7 +32,7 @@ jobs:
         run: |
           git add Grid_Database/
           git commit -m "New grid format added to database"
-          git push
+          git push --set-upstream origin $branch
              
       - name: Open pull request
         run: | #creates pull request 
