@@ -42,7 +42,7 @@ jobs:
         run: | #creates pull request 
           gh pr create \
             --title "New grid format added from issue form" \
-            --body "New grid format added" \
+            --body "insert pull request body here" \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
             
