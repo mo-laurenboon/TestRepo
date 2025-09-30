@@ -33,5 +33,5 @@ with open(output, "w") as f:
   json.dumps(grid, indent=2)
 print(f"Json file created successfully, file saved as {output}")
 print("JSON appears as follows:")
-print(json.dumps(grid, indent=2)
+print(json.dumps(grid, indent=2))
   
