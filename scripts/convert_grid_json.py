@@ -73,5 +73,6 @@ if __name__ == '__main__':
   os.makedirs("grid-database", exist_ok=True)
 
   #create and save json file 
+  print("heres how json looks outside of the function:", grid)
   type, output = create_filename(grid)
   dump_to_json(grid, output)
