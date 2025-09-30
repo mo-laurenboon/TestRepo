@@ -56,6 +56,7 @@ def create_filename(grid):
 def dump_to_json(grid, output):
   with open(output, "w") as f:
     json.dumps(grid, indent=2)
+  print(grid)
   print(f"Json file created successfully, file saved as {output}")
 
   #append file to outputs so the filename can be printed in PR body
