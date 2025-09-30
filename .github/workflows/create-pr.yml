@@ -43,9 +43,11 @@ jobs:
           gh pr create \
             --title "New grid format added from issue form" \
             --body "New grid format addition pull request initiated:
-                    user: ${{ github.actor }} 
-                    branch: ${{ steps.create-branch.outputs.branch }} 
-                    file: ${{ steps.convert.outputs.json_file }}"  \
+                    -----------------------------------------------------
+                    User: ${{ github.actor }} 
+                    Issue ID: ${{ github.event.issue.number }}
+                    Branch: ${{ steps.create-branch.outputs.branch }} 
+                    File: ${{ steps.convert.outputs.json_file }}"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
             
