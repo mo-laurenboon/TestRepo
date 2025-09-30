@@ -6,7 +6,7 @@ on:
 jobs:
   create-pr:
     runs-on: ubuntu-latest
-    if: github.event.issue.template == 'Grid_Data_Form.yml"
+    #if: github.event.issue.template == 'Grid_Data_Form.yml"
     permissions:
       contents: write
       pull-requests: write
