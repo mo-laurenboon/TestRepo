@@ -11,8 +11,13 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup-repo
-      - uses: ./.github/actions/update-and-push
+
+      - name: run setup actions
+        uses: ./.github/actions/setup-repo
+
+      - name: update and push
+        id: create-branch
+        uses: ./.github/actions/update-and-push
       
       - name: show issue body
         run: echo "${{ github.event.issue.body }}" #prints body is issue into logs, remove later
@@ -30,10 +35,10 @@ jobs:
 
       - name: commit JSON
         run: |
-          git checkout ${{ steps.push.outputs.branch }}
+          git checkout ${{ steps.create-branch.outputs.branch }}
           git add Grid_Database/
           git commit -m "New grid format added to database"
-          git push --set-upstream origin ${{ steps.push.outputs.branch }}
+          git push --set-upstream origin ${{ steps.create-branch.outputs.branch }}
              
       - name: Open pull request
         run: | #creates pull request 
