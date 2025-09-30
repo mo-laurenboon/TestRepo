@@ -11,7 +11,7 @@ match = re.findall(r"### (.+?)\n\s*\n?(.+)", form)
 #convert issue body to dictionary format
 for key, value in match:
   clean = key.strip().lower().replace(" ", "")
-  if clean in ("LatitudePoints", "LongitudePoints"):
+  if clean in ("latitudepoints", "longitudepoints"):
     try: 
       grid[clean] = int(value.strip())
     except ValueError:
@@ -26,7 +26,7 @@ if grid['type'] == "simple":
 elif grid['type'] == "complex":
   type = 'c'
 
-output = f"Grid_Database/g-{type}-{grid['lat-points']}-{grid['long-points']}.json"
+output = f"Grid_Database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
 
 #create json format from YAML
 with open(output, "w") as f:
