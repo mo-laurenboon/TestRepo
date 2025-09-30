@@ -27,7 +27,13 @@ jobs:
         
       - name: convert file
         run: python scripts/convert_grid_json.py issue-body.txt
-        
+
+      - name: commit JSON
+        run: |
+          git add Grid_Database/
+          git commit -m "New grid format added to database"
+          git push
+             
       - name: Open pull request
         run: | #creates pull request 
           gh pr create \
