@@ -47,7 +47,7 @@ jobs:
             --body "New grid format addition pull request initiated:
                     user: ${{ github.actor }} 
                     branch: ${{ steps.create-branch.outputs.branch }} 
-                    file: ${{ process.env.filename }}"  \
+                    file: ${ process.env.filename }"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
             
