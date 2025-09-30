@@ -19,6 +19,8 @@ for key, value in match:
       print(f"Unable to convert {clean} to integer, storing value as string")
   else: grid[clean] = value.strip()
 
+print("DEBUGGING: keys parsed are:", list(grid.keys()))
+
 #setup file to be placed in grid database and named using contents values
 os.makedirs("Grid_Database", exist_ok=True)
 if grid['type'] == "simple":
