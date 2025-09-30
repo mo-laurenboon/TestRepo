@@ -19,12 +19,12 @@ for key, value in match:
   else: grid[clean] = value.strip()
 
 #setup file to be placed in grid database and named using contents values
-os.makedirs("Grid_Database", exist_ok=True)
+os.makedirs("grid-database", exist_ok=True)
 if grid['type'] == "simple":
   type = 's'
 elif grid['type'] == "complex":
   type = 'c'
-output = f"Grid_Database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
+output = f"grid-database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
 if os.path.exists(output):
   print(f" WARNING: This grid type already exists, please see {output}")
   sys.exit(1)
