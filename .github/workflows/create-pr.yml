@@ -6,6 +6,7 @@ on:
 jobs:
   create-pr:
     runs-on: ubuntu-latest
+    if: github.event.issue.template == 'Grid_Data_Form.yml"
     permissions:
       contents: write
       pull-requests: write
@@ -18,12 +19,9 @@ jobs:
       - name: update and push
         id: create-branch
         uses: ./.github/actions/update-and-push
-      
-      - name: show issue body
-        run: echo "${{ github.event.issue.body }}" #prints body is issue into logs, remove later
-        
+
       - name: pass issue body to file
-        run: echo "${{ github.event.issue.body }}" >> issue-body.txt #puts body of issue into file to be accesssed by python
+        run: echo "${{ github.event.issue.body }}" >> issue-body.txt 
         
       - name: setup python
         uses: actions/setup-python@v4
