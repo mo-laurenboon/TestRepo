@@ -33,3 +33,6 @@ if os.path.exists(output):
 with open(output, "w") as f:
   json.dumps(grid, indent=2)
 print(f"Json file created successfully, file saved as {output}")
+
+#append file to outputs so the filename can be printed in PR body
+print(f"json_file = {output}", file=open(os.environ['GITHUB_OUTPUT'], 'a'))
