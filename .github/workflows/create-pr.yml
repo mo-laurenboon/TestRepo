@@ -24,9 +24,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
-          
-      - name: install dependency
-        run: pip install pyyaml
         
       - name: convert file
         run: python scripts/convert_grid_json.py issue-body.txt
