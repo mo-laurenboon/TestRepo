@@ -14,13 +14,13 @@ except yaml.YAMLError as e:
 print("Issue body parsed as YAML successfully")
 
 #setup file to be placed in grid database and named using contents values
-os.makedirs("grid-database", exist_ok=True)
+os.makedirs("Grid_Database", exist_ok=True)
 if grid['Type'] == "simple":
   type = 's'
 elif grid['Type'] == "complex":
   type = 'c'
 
-output = f"grid-database/g-{type}-{grid['lat-points']}-{grid['long-points']}.json"
+output = f"Grid_Database/g-{type}-{grid['lat-points']}-{grid['long-points']}.json"
 
 #create json format from YAML
 with open(output, "w") as f:
