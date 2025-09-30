@@ -35,5 +35,5 @@ with open(output, "w") as f:
 print(f"Json file created successfully, file saved as {output}")
 
 #append file to outputs so the filename can be printed in PR body
-with open(os.enrivon["GITHUB_OUTPUT"], "a") as out:
+with open(os.environ["GITHUB_OUTPUT"], "a") as out:
   out.write(f"json_file={output}")
