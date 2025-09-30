@@ -14,15 +14,15 @@ jobs:
       - uses: ./.github/actions/setup-repo
       - uses: ./.github/actions/update-and-push
       - name: show issue body
-        run: echo "${{ github.event.issue.body }}"
+        run: echo "${{ github.event.issue.body }}" #prints body is issue into logs, remove later
       - name: pass issue body to file
-        run: echo "${{ github.event.issue.body }}" >> issue-body.txt
+        run: echo "${{ github.event.issue.body }}" >> issue-body.txt #puts body of issue into file to be accesssed by python
       - name: setup python
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
       - name: Open pull request
-        run: |
+        run: | #creates pull request 
           gh pr create \
             --title "New grid format added from issue form" \
             --body "New grid format added" \
