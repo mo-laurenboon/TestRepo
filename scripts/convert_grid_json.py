@@ -5,10 +5,9 @@ file = sys.argv[1]
 with open(file, "r") as f:
   form = f.read()
 
-#load in issue body
+#load in issue body and ey value pairs
 grid = {}
-match = re.findall(r"### (.+?)\n(.+)", form)
-
+match = re.findall(r"### (.+?)\n\s*\n?(.+)", form)
 #convert issue body to dictionary format
 for key, value in match:
   clean = key.strip().lower().replace(" ", "")
@@ -18,7 +17,6 @@ for key, value in match:
     except ValueError:
       print(f"Unable to convert {clean} to integer, storing value as string")
   else: grid[clean] = value.strip()
-
 print("DEBUGGING: keys parsed are:", list(grid.keys()))
 
 #setup file to be placed in grid database and named using contents values
