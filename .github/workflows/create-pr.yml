@@ -6,12 +6,18 @@ on:
 jobs:
   create-pr:
     runs-on: ubuntu-latest
-    #if: github.event.issue.template == 'Grid_Data_Form.yml"
     permissions:
       contents: write
       pull-requests: write
     steps:
       - uses: actions/checkout@v3
+
+      - name: check for grid template  #action runs only if correct issue template is chosen
+        run: |
+          template = "${{ github.event.issue.template }}"
+          if [ "$tempalte" != "Grid_Data_Form.yml" ]; then 
+            exit 0
+          fi
 
       - name: run setup actions
         uses: ./.github/actions/setup-repo
@@ -39,7 +45,7 @@ jobs:
           git push --set-upstream origin ${{ steps.create-branch.outputs.branch }}
              
       - name: Open pull request
-        run: | #creates pull request 
+        run: | #creates pull request body
           gh pr create \
             --title "New grid format added from issue form" \
             --body "insert pull request body here" \
