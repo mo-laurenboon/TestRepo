@@ -31,8 +31,10 @@ def create_dict(grid, match):
         print(f"Unable to convert {clean} to integer, storing value as string")
     else: 
       grid[clean] = value.strip()
+
+    print("debug: available keys:", list(grid.keys()))
       
-      return grid
+  return grid
 
 #generate filename from form contents
 def create_filename(grid):
@@ -48,7 +50,7 @@ def create_filename(grid):
     print(f" WARNING: This grid type already exists, please see {output}")
     sys.exit(1)
     
-    return type, output
+  return type, output
 
 #dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
