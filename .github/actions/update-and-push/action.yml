@@ -11,9 +11,9 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Update file
-      run: echo "branch successfuly created" > gh-update.txt
-      shell: bash
+    #- name: Update file
+    #  run: echo "branch successfuly created" > gh-update.txt
+    #  shell: bash
       
     - name: Commit and push
       id: push
@@ -21,8 +21,6 @@ runs:
         branch="grid-database/update-$(date +%s)"
         if [ "${{ inputs.update_only }}" = "false" ]; then
           git checkout -b "$branch"
-          git add gh-update.txt
-          git commit -m "chore: update file"
           echo "Pushing branch: $branch"
           git push origin "$branch"
         else
