@@ -12,13 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: check for grid template  #action runs only if correct issue template is chosen
-        run: |
-          template = "${{ github.event.issue.template }}"
-          if [ "$template" != "Grid_Data_Form.yml" ]; then 
-          exit 0
-          fi
-
       - name: run setup actions
         uses: ./.github/actions/setup-repo
 
