@@ -24,7 +24,7 @@ body:
   - type: input
     id: lat-points
     attributes:
-      label: Laitude Points
+      label: Latitude Points
       description: Number of latitude points
       placeholder: ...
     validations:
