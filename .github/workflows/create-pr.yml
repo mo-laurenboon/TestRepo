@@ -34,7 +34,7 @@ jobs:
       - name: commit JSON
         run: |
           git checkout ${{ steps.create-branch.outputs.branch }}
-          git add Grid_Database/
+          git add grid-database/
           git commit -m "New grid format added to database"
           git push --set-upstream origin ${{ steps.create-branch.outputs.branch }}
              
