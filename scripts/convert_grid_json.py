@@ -21,9 +21,9 @@ for key, value in match:
 
 #setup file to be placed in grid database and named using contents values
 os.makedirs("Grid_Database", exist_ok=True)
-if grid['Type'] == "simple":
+if grid['type'] == "simple":
   type = 's'
-elif grid['Type'] == "complex":
+elif grid['type'] == "complex":
   type = 'c'
 
 output = f"Grid_Database/g-{type}-{grid['lat-points']}-{grid['long-points']}.json"
