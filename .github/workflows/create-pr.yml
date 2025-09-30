@@ -13,16 +13,24 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-repo
       - uses: ./.github/actions/update-and-push
+      
       - name: show issue body
         run: echo "${{ github.event.issue.body }}" #prints body is issue into logs, remove later
+        
       - name: pass issue body to file
         run: echo "${{ github.event.issue.body }}" >> issue-body.txt #puts body of issue into file to be accesssed by python
+        
       - name: setup python
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
+          
+      - name: install dependency
+        run: pip install pyyaml
+        
       - name: convert file
         run: python scripts/convert_grid_json.py issue-body.txt
+        
       - name: Open pull request
         run: | #creates pull request 
           gh pr create \
@@ -30,5 +38,6 @@ jobs:
             --body "New grid format added" \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
+            
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
