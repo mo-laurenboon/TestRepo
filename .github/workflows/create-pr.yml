@@ -39,15 +39,13 @@ jobs:
           git push --set-upstream origin ${{ steps.create-branch.outputs.branch }}
              
       - name: Open pull request
-        env:
-          filename: $ {{ steps.convert.outputs.json_file }}
         run: | #creates pull request body
           gh pr create \
             --title "New grid format added from issue form" \
             --body "New grid format addition pull request initiated:
                     user: ${{ github.actor }} 
                     branch: ${{ steps.create-branch.outputs.branch }} 
-                    file: ${ process.env.filename }"  \
+                    file: ${{ steps.convert.outputs.json_file }}"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
             
