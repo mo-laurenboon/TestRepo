@@ -17,7 +17,7 @@ runs:
     - name: Commit and push
       id: push
       run: |
-        branch="gh/update-$(date +%s)"
+        branch="grid-database/update-$(date +%s)"
         if [ "${{ inputs.update_only }}" = "false" ]; then
           git checkout -b "$branch"
           git add gh-update.txt
