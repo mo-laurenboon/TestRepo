@@ -30,10 +30,10 @@ jobs:
 
       - name: commit JSON
         run: |
+          git checkout ${{ steps.outputs.branch }}
           git add Grid_Database/
           git commit -m "New grid format added to database"
-          git push --set-upstream origin "$branch"
-        shell: bash 
+          git push --set-upstream origin ${{ steps.outputs.branch }}
              
       - name: Open pull request
         run: | #creates pull request 
