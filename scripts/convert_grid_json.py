@@ -17,7 +17,6 @@ for key, value in match:
     except ValueError:
       print(f"Unable to convert {clean} to integer, storing value as string")
   else: grid[clean] = value.strip()
-print("DEBUGGING: keys parsed are:", list(grid.keys()))
 
 #setup file to be placed in grid database and named using contents values
 os.makedirs("Grid_Database", exist_ok=True)
@@ -25,13 +24,12 @@ if grid['type'] == "simple":
   type = 's'
 elif grid['type'] == "complex":
   type = 'c'
-
 output = f"Grid_Database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
-
-#create json format from YAML
+if os.path.exists(output):
+  print(f" WARNING: This grid type already exists, please see {output}")
+  sys.exit(1)
+  
+#dump to json file
 with open(output, "w") as f:
   json.dumps(grid, indent=2)
 print(f"Json file created successfully, file saved as {output}")
-print("JSON appears as follows:")
-print(json.dumps(grid, indent=2))
-  
