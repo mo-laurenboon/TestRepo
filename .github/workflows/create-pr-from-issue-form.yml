@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: update and push
+      - name: update and push branch
         id: push
         run: |
           branch="grid-database/update-$(date +%s)"
