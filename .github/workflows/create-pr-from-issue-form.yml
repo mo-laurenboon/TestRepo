@@ -20,13 +20,9 @@ jobs:
 #            value: ${{ steps.push.outputs.branch }}
         run: |
           branch="grid-database/update-$(date +%s)"
-          if [ "${{ inputs.update_only }}" = "false" ]; then
-            git checkout -b "$branch"
-            echo "Pushing branch: $branch"
-            git push origin "$branch"
-          else
-            echo "Skipping push as update_only is true"
-          fi
+          git checkout -b "$branch"
+          echo "Pushing branch: $branch"
+          git push origin "$branch"
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
         #shell: bash
       
