@@ -62,6 +62,7 @@ def dump_to_json(grid, output):
   #append file to outputs so the filename can be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
     out.write(f"json_file={output}")
+    out.write(f"grid={grid}")
 
   
 if __name__ == '__main__':
