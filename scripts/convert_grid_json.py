@@ -52,21 +52,14 @@ def create_filename(grid):
 
 #dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
-  '''
-  with open(output, "w") as f:
-    json.dumps(grid, indent=2)
-  print(grid)
-  print(f"Json file created successfully, file saved as {output}")
-  '''
   
-  print("heres the filename:", output)
-  print("heres the file contents:", grid)
-  #output = json.dumps(grid, indent=2)
+  with open(output, "w") as f:
+    f.write(json.dumps(grid, indent=2))
+  print(f"Json file created successfully, file saved as {output}")
 
   #append file to outputs so the filename can be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
     out.write(f"json_file={output}")
-    #out.write(f"grid={grid}")
 
   
 if __name__ == '__main__':
