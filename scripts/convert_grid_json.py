@@ -31,8 +31,6 @@ def create_dict(grid, match):
         print(f"Unable to convert {clean} to integer, storing value as string")
     else: 
       grid[clean] = value.strip()
-
-    print("debug: available keys:", list(grid.keys()))
       
   return grid
 
@@ -54,15 +52,18 @@ def create_filename(grid):
 
 #dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
+  '''
   with open(output, "w") as f:
     json.dumps(grid, indent=2)
   print(grid)
   print(f"Json file created successfully, file saved as {output}")
+  '''
+  output = json.dumps(grid, indent=2)
 
   #append file to outputs so the filename can be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
     out.write(f"json_file={output}")
-    out.write(f"grid={grid}")
+    #out.write(f"grid={grid}")
 
   
 if __name__ == '__main__':
