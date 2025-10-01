@@ -31,8 +31,8 @@ jobs:
         id: convert
         run: python scripts/convert_grid_json.py issue-body.txt
 
-      - name: parse and print output to json file
-        run: echo "${{ steps.convert.outputs.grid }}" >> "${{ steps.convert.outputs.json_file }}"
+      #- name: parse and print output to json file
+      #  run: echo "${{ steps.convert.outputs.grid }}" >> "${{ steps.convert.outputs.json_file }}"
 
       - name: commit JSON
         run: |
