@@ -14,17 +14,12 @@ jobs:
 
       - name: update and push
         id: push
-#        outputs:
- #         branch:
-  #          description: 'Branch name'
-#            value: ${{ steps.push.outputs.branch }}
         run: |
           branch="grid-database/update-$(date +%s)"
           git checkout -b "$branch"
           echo "Pushing branch: $branch"
           git push origin "$branch"
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
-        #shell: bash
       
       - name: parse issue body to file
         run: echo "${{ github.event.issue.body }}" >> issue-body.txt 
@@ -56,12 +51,10 @@ jobs:
                     -----------------------------------------------------
                     User: ${{ github.actor }} 
                     Issue ID: ${{ github.event.issue.number }}
-                    Branch: ${{ steps.create-branch.outputs.branch }} 
+                    Branch: ${{ steps.push.outputs.branch }} 
                     Filename: ${{ steps.convert.outputs.json_file }}"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
-            
-#          git checkout ${{ steps.create-branch.outputs.branch }}
 
 
 
