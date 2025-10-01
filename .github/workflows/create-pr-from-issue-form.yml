@@ -1,5 +1,4 @@
-name: 'create pull request
-description: 'create pull request from grd formatting issue form'
+name: 'create pull request from issue form'
 on: 
   issues:
     type: opened
@@ -15,10 +14,10 @@ jobs:
 
       - name: update and push
         id: push
-        outputs:
-          branch:
-            description: 'Branch name'
-            value: ${{ steps.push.outputs.branch }}
+#        outputs:
+ #         branch:
+  #          description: 'Branch name'
+#            value: ${{ steps.push.outputs.branch }}
         run: |
           branch="grid-database/update-$(date +%s)"
           if [ "${{ inputs.update_only }}" = "false" ]; then
