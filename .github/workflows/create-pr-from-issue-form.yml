@@ -51,6 +51,8 @@ jobs:
           git push --set-upstream origin ${{ steps.create-branch.outputs.branch }}
 
       - name: Open pull request
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
           gh pr create \
             --title "New grid format added from issue form" \
