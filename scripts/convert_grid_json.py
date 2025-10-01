@@ -91,12 +91,8 @@ def dump_to_json(grid, output):
   
 if __name__ == '__main__':
 
-  #match = load_grid_form()
-  #grid = create_dict(match)
   grid = create_dict(load_grid_form())
   #check database directory exists
   os.makedirs("grid-database", exist_ok=True)
   #create and save json file 
-  #output = create_filename(grid)
-  #dump_to_json(grid, output)
   dump_to_json(grid, create_filename(grid))
