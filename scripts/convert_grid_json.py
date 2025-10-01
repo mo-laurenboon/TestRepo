@@ -1,15 +1,23 @@
-''' 
+""" 
 This script takes the contens of the Grid_Data_Form.yml file and parses information
 to a json file that is added to grid-data base and checks for duplicate entries. It also
 automatically opens a pull request for review with key information on the new grid format
 parsed to the PR body.
-'''
+"""
 
-import sys, re, os, json
+import sys 
+import re
+import os
+import json
+
 
 #open the issue body and load key-value pairs 
 def load_grid_form():
-  
+  """
+  Loads the issue body from the form and identifies key-value pairs.
+
+  :returns: grid form contents 
+  """
   file = sys.argv[1]
   with open(file, "r") as f:
     form = f.read()
@@ -19,9 +27,19 @@ def load_grid_form():
   
   return grid, match
 
+
 #convert issue body to dictionary format and clean values
 def create_dict(grid, match):
-  
+  """
+  Generates a dictionary format from the loaded form contents and cleans 
+  the key-value pairs to ensure consistent formatting.
+
+  :param grid: the name of the dictionary 
+  :param match: the identified key value pairs from the form
+  :returns: dictionary containing the grid parameters from the form
+  :raises ValueError: raises an exception if the number of lat or long 
+                      points connot be converted to an integer value
+  """
   for key, value in match:
     clean = key.strip().lower().replace(" ", "")
     if clean in ("latitudepoints", "longitudepoints"):
@@ -34,9 +52,16 @@ def create_dict(grid, match):
       
   return grid
 
+
 #generate filename from form contents
 def create_filename(grid):
-  
+  """
+  Generates consistantly formatted filename from the form contents e.g.
+  'g-<type>-<number of latitude points>-<number of longitude points>.json'.
+
+  :param grid: dictionary containing the grid parameters from the form
+  :returns: formatted filename of the json file
+  """
   if grid['type'] == "simple":
     type = 's'
   elif grid['type'] == "complex":
@@ -48,16 +73,23 @@ def create_filename(grid):
     print(f" WARNING: This grid type already exists, please see {output}")
     sys.exit(1)
     
-  return type, output
+  return output
+
 
 #dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
-  
+  """
+  Dumps and writes the dictionary contents to a json file with the formatted name.
+  The function also outputs the filename as a variable so it cant be printed to the
+  body of the PR.
+
+  :param grid: dictionary containing the grid parameters from the form
+  :param output: formatted filename of the json file
+  """
   with open(output, "w") as f:
     f.write(json.dumps(grid, indent=2))
   print(f"Json file created successfully, file saved as {output}")
-
-  #append file to outputs so the filename can be printed in PR body
+  #append filename to outputs to be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
     out.write(f"json_file={output}")
 
@@ -71,6 +103,5 @@ if __name__ == '__main__':
   os.makedirs("grid-database", exist_ok=True)
 
   #create and save json file 
-  print("heres how json looks outside of the function:", grid)
-  type, output = create_filename(grid)
+  output = create_filename(grid)
   dump_to_json(grid, output)
