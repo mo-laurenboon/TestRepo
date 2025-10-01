@@ -11,7 +11,6 @@ import sys
 import json
 
 
-#open the issue body and load key-value pairs 
 def load_grid_form():
   """
   Loads the issue body from the form and identifies key-value pairs.
@@ -21,7 +20,6 @@ def load_grid_form():
   parser = argparse.ArgumentParser(description="Open issue body")
   parser.add_argument("file", help="The issue body to process")
   args = parser.parse_args()
-
   with open(args.file, "r") as f:
     form = f.read()
 
@@ -30,7 +28,6 @@ def load_grid_form():
   return match
 
 
-#convert issue body to dictionary format and clean values
 def create_dict(match):
   """
   Generates a dictionary format from the loaded form contents and cleans the key-value pairs to 
@@ -57,7 +54,6 @@ def create_dict(match):
   return grid
 
 
-#generate filename from form contents
 def create_filename(grid):
   """
   Generates consistantly formatted filename from the form contents e.g.
@@ -80,7 +76,6 @@ def create_filename(grid):
   return output
 
 
-#dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
   """
   Dumps and writes the dictionary contents to a json file with the formatted name. The function 
