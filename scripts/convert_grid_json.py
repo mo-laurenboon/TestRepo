@@ -1,13 +1,13 @@
 """ 
-This script takes the contens of the Grid_Data_Form.yml file and parses information
-to a json file that is added to grid-data base and checks for duplicate entries. It also
-automatically opens a pull request for review with key information on the new grid format
-parsed to the PR body.
+This script takes the contens of the Grid_Data_Form.yml file and parses information to a json file
+that is added to grid-data base and checks for duplicate entries. It also automatically opens a
+pull request for review with key information on the new grid formatparsed to the PR body.
 """
 
-import sys 
+import argparse
 import re
 import os
+import sys 
 import json
 
 
@@ -18,28 +18,32 @@ def load_grid_form():
 
   :returns: grid form contents 
   """
-  file = sys.argv[1]
-  with open(file, "r") as f:
+  parser = argparse.ArgumentParser(description="Open issue body")
+  parser.add_argument("file", help="The issue body to process")
+  args = parser.parse_args()
+
+  with open(args.file, "r") as f:
     form = f.read()
 
-  grid = {}
   match = re.findall(r"### (.+?)\n\s*\n?(.+)", form)
   
-  return grid, match
+  return match
 
 
 #convert issue body to dictionary format and clean values
-def create_dict(grid, match):
+def create_dict(match):
   """
-  Generates a dictionary format from the loaded form contents and cleans 
-  the key-value pairs to ensure consistent formatting.
+  Generates a dictionary format from the loaded form contents and cleans the key-value pairs to 
+  ensure consistent formatting.
 
   :param grid: the name of the dictionary 
   :param match: the identified key value pairs from the form
   :returns: dictionary containing the grid parameters from the form
-  :raises ValueError: raises an exception if the number of lat or long 
-                      points connot be converted to an integer value
+  :raises ValueError: raises an exception if the number of lat or long points connot be converted 
+                      to an integer value
   """
+  grid = {}
+
   for key, value in match:
     clean = key.strip().lower().replace(" ", "")
     if clean in ("latitudepoints", "longitudepoints"):
@@ -79,9 +83,8 @@ def create_filename(grid):
 #dump file contents to json and append filename to outputs
 def dump_to_json(grid, output):
   """
-  Dumps and writes the dictionary contents to a json file with the formatted name.
-  The function also outputs the filename as a variable so it cant be printed to the
-  body of the PR.
+  Dumps and writes the dictionary contents to a json file with the formatted name. The function 
+  also outputs the filename as a variable so it cant be printed to the body of the PR.
 
   :param grid: dictionary containing the grid parameters from the form
   :param output: formatted filename of the json file
@@ -96,8 +99,8 @@ def dump_to_json(grid, output):
   
 if __name__ == '__main__':
 
-  grid, match = load_grid_form()
-  grid = create_dict(grid, match)
+  match = load_grid_form()
+  grid = create_dict(match)
   
   #check database directory exists
   os.makedirs("grid-database", exist_ok=True)
