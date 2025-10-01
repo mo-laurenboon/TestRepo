@@ -58,7 +58,10 @@ def dump_to_json(grid, output):
   print(grid)
   print(f"Json file created successfully, file saved as {output}")
   '''
-  output = json.dumps(grid, indent=2)
+  
+  print("heres the filename:", output)
+  print("heres the file contents:", grid)
+  #output = json.dumps(grid, indent=2)
 
   #append file to outputs so the filename can be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
