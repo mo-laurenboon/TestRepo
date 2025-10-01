@@ -12,8 +12,3 @@ runs:
         git config user.name "github-actions"
         git config user.email "github-actions@users.noreply.github.com"
       shell: bash
-      
-   # - name: Authenticate using token
-    #  run: |
-    #    git remote set-url origin https://x-access-token:${{ inputs.token }}@github.com/${{ github.repository }}
-    #  shell: bash
