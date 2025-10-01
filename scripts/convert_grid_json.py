@@ -40,7 +40,6 @@ def create_dict(match):
                       to an integer value
   """
   grid = {}
-
   for key, value in match:
     clean = key.strip().lower().replace(" ", "")
     if clean in ("latitudepoints", "longitudepoints"):
@@ -66,9 +65,7 @@ def create_filename(grid):
     type = 's'
   elif grid['type'] == "complex":
     type = 'c'
-    
   output = f"grid-database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
-  
   if os.path.exists(output):
     print(f" WARNING: This grid type already exists, please see {output}")
     sys.exit(1)
@@ -94,12 +91,12 @@ def dump_to_json(grid, output):
   
 if __name__ == '__main__':
 
-  match = load_grid_form()
-  grid = create_dict(match)
-  
+  #match = load_grid_form()
+  #grid = create_dict(match)
+  grid = create_dict(load_grid_form())
   #check database directory exists
   os.makedirs("grid-database", exist_ok=True)
-
   #create and save json file 
-  output = create_filename(grid)
-  dump_to_json(grid, output)
+  #output = create_filename(grid)
+  #dump_to_json(grid, output)
+  dump_to_json(grid, create_filename(grid))
