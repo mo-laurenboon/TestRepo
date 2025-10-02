@@ -2,7 +2,6 @@ name: 'create pull request from issue form'
 on: 
   issues:
     type: opened
-    if: contains(github.event.issue.labels.*.name, 'grid-format')
   workflow_dispatch:
 jobs:
   create-pr:
@@ -12,7 +11,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v3
-
+      
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
+        
       - name: update and push branch
         id: push
         run: |
