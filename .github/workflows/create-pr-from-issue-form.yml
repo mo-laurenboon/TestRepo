@@ -2,10 +2,10 @@ name: 'create pull request from issue form'
 on: 
   issues:
     type: opened
+    if: contains(github.event.issue.labels.*.name, 'grid-format')
   workflow_dispatch:
 jobs:
   create-pr:
-    if: contains(github.event.issue.labels.*.name, 'grid-format')
     runs-on: ubuntu-latest
     permissions:
       contents: write
