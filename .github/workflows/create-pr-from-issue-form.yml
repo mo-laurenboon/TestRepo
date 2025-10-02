@@ -11,10 +11,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v3
-      
-        if: contains(github.event.issue.labels.*.name, 'grid-format')
         
       - name: update and push branch
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
         id: push
         run: |
           branch="grid-database/update-$(date +%s)"
@@ -24,14 +23,17 @@ jobs:
           echo "branch=$branch" >> "$GITHUB_OUTPUT"
       
       - name: parse issue body to file
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
         run: echo "${{ github.event.issue.body }}" >> issue-body.txt 
         
       - name: setup python
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
         uses: actions/setup-python@v4
         with:
           python-version: 3.11
         
       - name: convert file
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
         id: convert
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,6 +46,7 @@ jobs:
           git push --set-upstream origin ${{ steps.push.outputs.branch }}
 
       - name: Open pull request
+        if: contains(github.event.issue.labels.*.name, 'grid-format')
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
