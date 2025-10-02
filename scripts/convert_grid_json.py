@@ -79,7 +79,8 @@ def create_filename(grid):
 def dump_to_json(grid, output, duplicate):
   """
   Dumps and writes the dictionary contents to a json file with the formatted name. The function 
-  also outputs the filename as a variable so it cant be printed to the body of the PR.
+  also outputs the filename and duplicate status as a variable so it cant be printed to the body
+  of the PR.
 
   :param grid: dictionary containing the grid parameters from the form
   :param output: formatted filename of the json file
