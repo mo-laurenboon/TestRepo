@@ -1,6 +1,7 @@
 name: Grid data
 description: File a grid format
 title: "Grid Format Addition Request: "
+labels: "grid-format"
 body:
   - type: textarea
     id: grid-description
