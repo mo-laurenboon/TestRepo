@@ -89,8 +89,8 @@ def dump_to_json(grid, output, duplicate):
   print(f"Json file created successfully, file saved as {output}")
   #append filename to outputs to be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
-    out.write(f"json_file={output}")
-    out.write(f"duplicate_status={duplicate}")
+    out.write(f"json_file={output}\n")
+    out.write(f"\nduplicate_status={duplicate}")
 
   
 if __name__ == '__main__':
