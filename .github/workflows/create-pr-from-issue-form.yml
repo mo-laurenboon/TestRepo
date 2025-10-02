@@ -20,8 +20,7 @@ jobs:
           git checkout -b "$branch"
           echo "Pushing branch: $branch"
           git push origin "$branch"
-          
-        #echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
       
       - name: parse issue body to file
         run: echo "${{ github.event.issue.body }}" >> issue-body.txt 
