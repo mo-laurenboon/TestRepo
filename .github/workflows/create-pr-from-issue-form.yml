@@ -6,6 +6,7 @@ on:
 jobs:
   create-pr:
     runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'grid-format')
     permissions:
       contents: write
       pull-requests: write
