@@ -66,14 +66,17 @@ def create_filename(grid):
   elif grid['type'] == "complex":
     type = 'c'
   output = f"grid-database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
+  
   if os.path.exists(output):
+    duplicate = f"WARNING: THIS GRID IS A DUPLICATE, see database under {output}"
     print(f" WARNING: This grid type already exists, please see {output}")
-    sys.exit(1)
+  else:
+    duplicate = "False, unique grid"
     
-  return output
+  return output, duplicate
 
 
-def dump_to_json(grid, output):
+def dump_to_json(grid, output, duplicate):
   """
   Dumps and writes the dictionary contents to a json file with the formatted name. The function 
   also outputs the filename as a variable so it cant be printed to the body of the PR.
@@ -87,6 +90,7 @@ def dump_to_json(grid, output):
   #append filename to outputs to be printed in PR body
   with open(os.environ["GITHUB_OUTPUT"], "a") as out:
     out.write(f"json_file={output}")
+    out.write(f"duplicate_status={duplicate}")
 
   
 if __name__ == '__main__':
@@ -95,4 +99,5 @@ if __name__ == '__main__':
   #check database directory exists
   os.makedirs("grid-database", exist_ok=True)
   #create and save json file 
-  dump_to_json(grid, create_filename(grid))
+  output, duplicate = create_filename(grid)
+  dump_to_json(grid, output, duplicate)
