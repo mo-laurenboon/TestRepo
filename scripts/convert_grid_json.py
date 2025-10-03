@@ -11,24 +11,22 @@ import sys
 import json
 
 
-def load_grid_form():
+def set_arg_parser():
   """
-  Loads the issue body from the form and identifies key-value pairs.
-
-  :returns: grid form contents 
+  
   """
   parser = argparse.ArgumentParser(description="Open issue body")
   parser.add_argument("file", help="The issue body to process")
   args = parser.parse_args()
-  with open(args.file, "r") as f:
-    form = f.read()
-
-  match = re.findall(r"### (.+?)\n\s*\n?(.+)", form)
   
-  return match
+  return args
+
+def add_content_warning(warning):
+  global warnings
+  warnings.append(warning)
 
 
-def create_dict(match):
+def create_grid_dict(match):
   """
   Generates a dictionary format from the loaded form contents and cleans the key-value pairs to 
   ensure consistent formatting.
@@ -47,11 +45,20 @@ def create_dict(match):
         grid[clean] = int(value.strip())
       except ValueError:
         print(f"Unable to convert {clean} to integer, storing value as string")
+        add_content_warning("User has entered a string in a field that requires a non-zero positive integer.")
     else: 
       grid[clean] = value.strip()
       
   return grid
 
+
+def check_grid_dict_contents(grid):
+  if grid['latitudepoints'] == 0 or grid['longitudepoints'] == 0:
+    add_content_warning("User has entered a zero value in a field that requires a non-zero positive integer.")
+  if grid['latitudepoints'] < 0 or grid['longitudepoints'] < 0:
+    add_content_warning("User has entered a negative value in a field that requires a non-zero positive integer.")
+  if not (grid['latitudepoints'] % 1 == 0) or not (grid['longitudepoints'] % 1 == 0):
+    add_content_warning("User has entered a float value in a field that requires a non-zero positive integer.")
 
 def create_filename(grid):
   """
@@ -68,12 +75,9 @@ def create_filename(grid):
   output = f"grid-database/g-{type}-{grid['latitudepoints']}-{grid['longitudepoints']}.json"
   
   if os.path.exists(output):
-    duplicate = f"WARNING: THIS GRID IS A DUPLICATE, see database under {output}"
-    print(f" WARNING: This grid type already exists, please see {output}")
-  else:
-    duplicate = "False, unique grid"
+    add_content_warning(f"WARNING: THIS GRID IS A DUPLICATE, see database under {output}.")
     
-  return output, duplicate
+  return output
 
 
 def dump_to_json(grid, output, duplicate):
@@ -86,19 +90,31 @@ def dump_to_json(grid, output, duplicate):
   :param output: formatted filename of the json file
   """
   with open(output, "w") as f:
-    f.write(json.dumps(grid, indent=2))
+    json.dump(grid, f, indent=2)
   print(f"Json file created successfully, file saved as {output}")
-  #append filename to outputs to be printed in PR body
-  with open(os.environ["GITHUB_OUTPUT"], "a") as out:
-    out.write(f"json_file={output}\n")
-    out.write(f"\nduplicate_status={duplicate}")
 
   
 if __name__ == '__main__':
+  warnings = []
 
-  grid = create_dict(load_grid_form())
+  args = set_arg_parser()
+  with open(args.file, "r") as f:
+    form = f.read()
+
+  match = re.findall(r"### (.+?)\n\s*\n?(.+)", form)
+
+  grid = create_grid_dict(match)
+
+  check_grid_dict_contents(grid)
+
   #check database directory exists
   os.makedirs("grid-database", exist_ok=True)
+
+  output = create_filename(grid)
+
   #create and save json file 
-  output, duplicate = create_filename(grid)
-  dump_to_json(grid, output, duplicate)
+  dump_to_json(grid, output)
+
+  with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+    out.write(f"json_file={output}\n")
+    out.write(f"\nwarnings={"\n".join(warnings)}")
