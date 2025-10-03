@@ -54,7 +54,7 @@ jobs:
                     Issue ID: ${{ github.event.issue.number }}
                     Branch: ${{ steps.push.outputs.branch }}
                     Filename: ${{ steps.convert.outputs.json_file }}
-                    Warnings: ${{ steps.convert.outputs.warnings}}"  \
+                    Warnings: ${{ steps.convert.outputs.warnings }}"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
 
