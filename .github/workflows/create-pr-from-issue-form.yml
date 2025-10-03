@@ -52,9 +52,9 @@ jobs:
                     -----------------------------------------------------
                     User: ${{ github.actor }} 
                     Issue ID: ${{ github.event.issue.number }}
-                    Duplicate Status: ${{ steps.convert.outputs.duplicate_status }}
-                    Branch: ${{ steps.push.outputs.branch }} 
-                    Filename: ${{ steps.convert.outputs.json_file }}"  \
+                    Branch: ${{ steps.push.outputs.branch }}
+                    Filename: ${{ steps.convert.outputs.json_file }}
+                    Warnings: ${{ steps.convert.outputs.warnings}}"  \
             --base main \
             --head $(git rev-parse --abbrev-ref HEAD)
 
